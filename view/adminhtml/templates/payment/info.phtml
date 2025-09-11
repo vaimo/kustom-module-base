@@ -1,0 +1,45 @@
+<?php
+/**
+ * Copyright © Klarna Bank AB (publ)
+ *
+ * For the full copyright and license information, please view the NOTICE
+ * and LICENSE files that were distributed with this source code.
+ */
+?>
+<?php
+/** @var Magento\Framework\Escaper $escaper */
+
+/** @var $block Klarna\Base\Block\Info\Klarna */
+$specificInfo = $block->getFullSpecificInformation();
+$title = $block->getMethod()->getTitle();
+?>
+<p>
+    <?php if (!$block->isB2bOrder()): ?>
+    <img width="150"
+         src="<?= /* @noEscape */ $block->getLogoUrl(); ?>"
+         alt="<?= /* @noEscape */
+            strip_tags($title); ?>"/>
+    <?php endif ?>
+<p><?= /* @noEscape */ $title; ?></p>
+</p>
+
+<?php if ($specificInfo): ?>
+    <table class="data-table admin__table-secondary">
+        <?php foreach ($specificInfo as $label => $value): ?>
+            <?php $implodedValue = implode("\n", $block->getValueAsArray($value, true)); ?>
+            <tr>
+                <th><?= $escaper->escapeUrl($label) ?>:</th>
+                <td>
+                    <?php if ($block->isStringUrl($value)): ?>
+                        <a href="<?= /* @noEscape */ $value; ?>" target="_blank">
+                            <?= $escaper->escapeUrl(__('Click Here')) ?>
+                        </a>
+                    <?php else: ?>
+                        <?= /* @noEscape */ nl2br($escaper->escapeUrl($implodedValue)); ?>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+<?php endif; ?>
+<?= $block->getChildHtml() ?>

@@ -1,0 +1,14 @@
+"Click on this %1 to visit the Klarna Merchant Onboarding Page and request credentials.","Klik på dette %1 for at besøge onboardingsiden på Klarnas Merchant Portal, hvor du kan bede om credentials."
+"Order ID",Ordre-ID
+Error,Fejl
+Reference,Ordrenummer
+Reservation,Reservation
+"Merchant Portal","Merchant Portal"
+"Invoice ID (#%1)","Fakturanummer (#%1)"
+"Invalid API version selected!","Ugyldig API-version valgt!"
+"Klarna module country region warning:","Advarsel Klarna-modul:"
+"For the following stores the countries are configured to require a region:","For følgende butikker er landene indstillede til at have region obligatorisk:"
+"Click here to go to <a href=""%1"">Country Configuration</a> and change your settings.","Klik her for at gå til <a href=""%1"">Country Configuration</a>, hvor du kan ændre dine indstillinger."
+"Klarna module store information warning:","Advarsel Klarna-modul:"
+"The following stores require a selected country in the store information","Følgende butikker kræver et valgt land i butiksinformationen"
+"Click here to go to <a href=""%1"">Store Information</a> and change your settings.","Klik her for at gå til <a href=""%1"">Butiksinformation</a>, hvor du kan ændre dine indstillinger."

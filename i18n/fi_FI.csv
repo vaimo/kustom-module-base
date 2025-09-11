@@ -1,0 +1,14 @@
+"Click on this %1 to visit the Klarna Merchant Onboarding Page and request credentials.","Klikkaa tätä %1 vieraillaksesi Klarna Merchant Onboarding-sivulla ja pyytääksesi tunnuksia"
+"Order ID",Tilausnumero
+Error,Virhe
+Reference,Viite
+Reservation,Varaus
+"Merchant Portal","Merchant Portal"
+"Invoice ID (#%1)","Laskunumero (#%1)"
+"Invalid API version selected!","Epäkelpo API-versio valittu!"
+"Klarna module country region warning:","Klarna-moduuli maa-aluevaroitus:"
+"For the following stores the countries are configured to require a region:","Seuraaville kaupoille maat on konfiguroitu vaatimaan alue:"
+"Click here to go to <a href=""%1"">Country Configuration</a> and change your settings.","Klikkaa tästä <a href=""%1"">Country Configuration</a> ja muuta asetuksiasi."
+"Klarna module store information warning:","Klarna-moduuli kaupan tiedot-varoitus:"
+"The following stores require a selected country in the store information","Seuraavat kaupat vaativat maan valinnan kaupan tiedoissa"
+"Click here to go to <a href=""%1"">Store Information</a> and change your settings.","Klikkaa tästä <a href=""%1"">Store Information</a> ja muuta asetuksiasi."

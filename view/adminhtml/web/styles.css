@@ -1,0 +1,21 @@
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+.klarna-section .klarna-payment-logo {
+  background: url("images/Kustom_Badge.png") no-repeat 0 50% / 18rem auto;
+  height: 100px;
+  width: auto;
+  padding-left: 20rem;
+  display: inline-block;
+  vertical-align: middle;
+}
+.klarna-section .button-container {
+  float: right;
+}
+.klarna-section .klarna-payment-text {
+  display: inline-block;
+  vertical-align: middle;
+  width: 50%;
+}

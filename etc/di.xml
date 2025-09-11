@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Klarna Bank AB (publ)
+ *
+ * For the full copyright and license information, please view the NOTICE
+ * and LICENSE files that were distributed with this source code.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Custom config reader -->
+    <virtualType name="Klarna\Base\Config\Virtual"
+                 type="Magento\Framework\Config\Data">
+        <arguments>
+            <argument name="reader" xsi:type="object">Klarna\Base\Config\Reader\Virtual</argument>
+            <argument name="cacheId" xsi:type="string">klarna_config</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Klarna\Base\Config\Reader\Virtual"
+                 type="Magento\Framework\Config\Reader\Filesystem">
+        <arguments>
+            <argument name="converter" xsi:type="object">Klarna\Base\Config\Converter\Dom</argument>
+            <argument name="schemaLocator" xsi:type="object">Klarna\Base\Config\SchemaLocator\Virtual</argument>
+            <argument name="fileName" xsi:type="string">klarna.xml</argument>
+            <argument name="idAttributes" xsi:type="array">
+                <item name="/klarna/external_payment_method" xsi:type="string">id</item>
+                <item name="/klarna/api_type" xsi:type="string">id</item>
+                <item name="/klarna/api_type/options/option" xsi:type="string">id</item>
+                <item name="/klarna/api_version" xsi:type="string">id</item>
+                <item name="/klarna/api_version/options/option" xsi:type="string">id</item>
+                <item name="/klarna/merchant_checkbox" xsi:type="string">id</item>
+                <item name="/klarna/order_lines" xsi:type="string">id</item>
+                <item name="/klarna/order_lines/line" xsi:type="string">id</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Klarna\Base\Config\SchemaLocator\Virtual"
+                 type="Magento\Framework\Config\GenericSchemaLocator">
+        <arguments>
+            <argument name="moduleName" xsi:type="string">Klarna_Base</argument>
+            <argument name="schema" xsi:type="string">klarna.xsd</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Constructor injection -->
+    <type name="Klarna\Base\Model\System\Config\Source\Base">
+        <arguments>
+            <argument name="config" xsi:type="object">Klarna\Base\Config\Virtual</argument>
+        </arguments>
+    </type>
+    <type name="Klarna\Base\Model\Api\Rest\Service">
+        <arguments>
+            <argument name="log" xsi:type="object">Klarna\Logger\Model\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Klarna\Base\Helper\KlarnaConfig">
+        <arguments>
+            <argument name="config" xsi:type="object">Klarna\Base\Config\Virtual</argument>
+        </arguments>
+    </type>
+    <preference for="Klarna\Base\Api\ServiceInterface" type="Klarna\Base\Model\Api\Rest\Service" />
+    <preference for="Klarna\Base\Api\OrderInterface" type="Klarna\Base\Model\Order" />
+    <preference for="Klarna\Base\Api\OrderRepositoryInterface" type="Klarna\Base\Model\OrderRepository" />
+
+    <!-- Sensitive and environment settings -->
+    <type name="Magento\Config\Model\Config\TypePool">
+        <arguments>
+            <argument name="sensitive" xsi:type="array">
+                <item name="klarna/api/merchant_id" xsi:type="string">1</item>
+                <item name="klarna/api/shared_secret" xsi:type="string">1</item>
+            </argument>
+            <argument name="environment" xsi:type="array">
+                <item name="klarna/api/test_mode" xsi:type="string">1</item>
+                <item name="klarna/api/debug" xsi:type="string">1</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>
