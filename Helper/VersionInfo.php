@@ -20,7 +20,7 @@ use Magento\Framework\Module\ResourceInterface;
  */
 class VersionInfo
 {
-    public const M2_KLARNA = 'klarna/m2-klarna';
+    public const M2_KLARNA = 'kustom/module-checkout';
 
     /**
      * @var State

@@ -145,13 +145,13 @@ class VersionInfoTest extends TestCase
     {
         $this->dependencyMocks['fileDriver']->expects($this->once())
             ->method('fileGetContents')
-            ->willReturn('{"version": "3.2.0"}');
+            ->willReturn('{"version": "1.1.0"}');
         $this->dependencyMocks['fileDriver']->expects($this->once())
             ->method('isExists')
             ->willReturn(true);
 
         $result = $this->model->getFallbackExtensionVersion();
-        static::assertSame('3.2.0', $result);
+        static::assertSame('1.1.0', $result);
     }
 
     public function testGetFallbackExtensionVersionFileGetContentsThrowsException(): void
