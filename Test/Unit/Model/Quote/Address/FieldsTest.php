@@ -47,7 +47,39 @@ class FieldsTest extends TestCase
         $this->assertSame($expected, $data);
     }
 
-    public function differentAddressInputDataProvider(): array
+    /**
+     * @dataProvider addressInputDataProviderWithStreetAddress2
+     *
+     * @param $klarnaAddressInput
+     * @param $expected
+     * @return void
+     */
+    public function testGetQuoteAddressStreet2FieldsByKlarnaAddressCheckCorrespondingInputOutput(
+        $klarnaAddressInput,
+        $expected
+    ): void {
+
+        $mock = $this->getMockBuilder(DataObject::class);
+        $mock->disableOriginalConstructor();
+
+        $mock->onlyMethods(['getData']);
+        $addMethods = $klarnaAddressInput;
+        unset($addMethods['getData']);
+
+        $mock->addMethods(array_keys($addMethods));
+        $dataObject = $mock->getMock();
+
+        foreach ($klarnaAddressInput as $title => $value) {
+            $dataObject->method($title)->willReturn($value);
+        }
+        $this->dependencyMocks['dataObjectFactory']->method('create')->willReturn($dataObject);
+
+        $data = $this->model->getQuoteAddressFieldsByKlarnaAddress($klarnaAddressInput);
+
+        $this->assertSame($expected, $data);
+    }
+
+    public function addressInputDataProviderWithStreetAddress2(): array
     {
         $basicAddressInput = [
             'getGivenName' => 'my firstname',
@@ -58,7 +90,7 @@ class FieldsTest extends TestCase
             'getTitle' => 'Mr.',
             'getStreetAddress' => 'my street address',
             'getHouseExtension' => '10',
-            'getStreetAddress2' => 'my street address 2',
+            'getData' => 'my street address 2',
             'getRamin' => 'my ramin',
             'getPostalCode' => '10101',
             'getCity' => 'BE',
@@ -84,9 +116,52 @@ class FieldsTest extends TestCase
             'country_id' => 'DE',
         ];
 
+        return [
+            'inputWithStreetAddress2' => [
+                $basicAddressInput,
+                $basicExpectedOutput,
+            ]
+        ];
+    }
+
+    public function differentAddressInputDataProvider(): array
+    {
+        $basicAddressInput = [
+            'getGivenName' => 'my firstname',
+            'getFamilyName' => 'my lastname',
+            'getCountry' => 'DE',
+            'getEmail' => 'myEmailAddress@klarna.com',
+            'getOrganizationName' => 'Klarna',
+            'getTitle' => 'Mr.',
+            'getStreetAddress' => 'my street address',
+            'getHouseExtension' => '10',
+            'getRamin' => 'my ramin',
+            'getPostalCode' => '10101',
+            'getCity' => 'BE',
+            'getRegion' => 'BE',
+            'getPhone' => '+491111111111',
+        ];
+
+        $basicExpectedOutput = [
+            'lastname' => 'my lastname',
+            'firstname' => 'my firstname',
+            'email' => 'myEmailAddress@klarna.com',
+            'company' => 'Klarna',
+            'prefix' => 'Mr.',
+            'street' => [
+                'my street address10',
+            ],
+            'postcode' => '10101',
+            'city' => 'BE',
+            'region_id' => 20,
+            'region' => 'BE',
+            'telephone' => '+491111111111',
+            'country_id' => 'DE',
+        ];
+
         $addressInputContainsDOB = array_merge($basicAddressInput, [
-                    'hasCustomerDOB' => true,
-                    'getCustomerDOB' => '02/02/2002',
+            'hasCustomerDOB' => true,
+            'getCustomerDOB' => '02/02/2002',
         ]);
         $expectedOutputContainsDOB = array_merge($basicExpectedOutput, ['dob' => '02/02/2002']);
 
