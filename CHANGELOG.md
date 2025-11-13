@@ -1,4 +1,10 @@
 
+11.0.13 / 2025-11-13
+==================
+
+  * KUSTOM-33 Change version info in admin panel
+  * KUSTOM-4  Fix C/O address sync from Kustom to Magento
+
 11.0.12 / 2025-06-03
 ==================
 

@@ -90,7 +90,7 @@ class Fields
         return array_filter(
             [
                 $klarnaAddressData->getStreetAddress() . $klarnaAddressData->getHouseExtension(),
-                $klarnaAddressData->getStreetAddress2(),
+                $klarnaAddressData->getData('street_address2'),
             ]
         );
     }
