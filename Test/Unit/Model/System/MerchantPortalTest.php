@@ -33,22 +33,6 @@ class MerchantPortalTest extends TestCase
      */
     private $mageOrder;
 
-    /**
-     * @covers ::getOrderMerchantPortalLink
-     */
-    public function testGetOrderMerchantPortalLinkUsesGlobalUrl(): void
-    {
-        $merchantId = 'K1';
-        $this->dependencyMocks['apiConfiguration']->method('getUserName')
-            ->willReturn($merchantId);
-
-        $urlPath = 'merchants/' . $merchantId . '/orders/';
-        $result  = $this->model->getOrderMerchantPortalLink($this->mageOrder, $this->klarnaOrder);
-        $expected = MerchantPortal::MERCHANT_PORTAL . $urlPath;
-
-        static::assertEquals($result, $expected);
-    }
-
     protected function setUp(): void
     {
         $this->model = parent::setUpMocks(MerchantPortal::class);
@@ -64,5 +48,47 @@ class MerchantPortalTest extends TestCase
             ->willReturn($store);
         $this->mageOrder->method('getOrderCurrencyCode')
             ->willReturn('currency_code');
+
+        $merchantId = 'MERCHANT-123';
+        $this->dependencyMocks['apiConfiguration']
+            ->method('getUsername')
+            ->willReturn($merchantId);
+        $this->klarnaOrder
+            ->method('getKlarnaOrderId')
+            ->willReturn('ORDER-123');
+    }
+
+    /**
+     * @covers ::getOrderMerchantPortalLink
+     */
+    public function testGetOrderMerchantPortalLinkToLive(): void
+    {
+        $this->dependencyMocks['apiConfiguration']
+            ->method('isTestMode')
+            ->willreturn(false);
+
+        $urlPath = 'orders/ORDER-123?merchantId=MERCHANT-123';
+        $expected = MerchantPortal::MERCHANT_PORTAL . $urlPath;
+
+        $result = $this->model->getOrderMerchantPortalLink($this->mageOrder, $this->klarnaOrder);
+
+        static::assertEquals($result, $expected);
+    }
+
+    /**
+     * @covers ::getOrderMerchantPortalLink
+     */
+    public function testGetOrderMerchantPortalLinkToTest(): void
+    {
+        $this->dependencyMocks['apiConfiguration']
+            ->method('isTestMode')
+            ->willreturn(true);
+
+        $urlPath = 'orders/ORDER-123?merchantId=MERCHANT-123';
+        $expected = MerchantPortal::MERCHANT_TEST_PORTAL . $urlPath;
+
+        $result = $this->model->getOrderMerchantPortalLink($this->mageOrder, $this->klarnaOrder);
+
+        static::assertEquals($result, $expected);
     }
 }

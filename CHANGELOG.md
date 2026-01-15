@@ -1,3 +1,7 @@
+11.0.14 / 2026-01-15
+==================
+
+* KUSTOM-36 Adjusts the endpoints to direct to Kustom instead of Klarna API
 
 11.0.13 / 2025-11-13
 ==================

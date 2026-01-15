@@ -19,7 +19,8 @@ use Magento\Store\Api\Data\StoreInterface;
  */
 class MerchantPortal
 {
-    public const MERCHANT_PORTAL = 'https://portal.klarna.com/orders/';
+    public const MERCHANT_PORTAL = 'https://portal.kustom.co/';
+    public const MERCHANT_TEST_PORTAL = 'https://portal.playground.kustom.co/';
 
     /**
      * @var Api
@@ -45,13 +46,16 @@ class MerchantPortal
     public function getOrderMerchantPortalLink(MageOrder $mageOrder, KlarnaOrder $klarnaOrder): string
     {
         $store = $mageOrder->getStore();
-        $merchantId = $this->apiConfiguration->getUserName($store, $mageOrder->getOrderCurrencyCode());
+        $currency = $mageOrder->getOrderCurrencyCode();
 
-        $merchantIdArray = explode("_", $merchantId);
-        return self::MERCHANT_PORTAL .
-            "merchants/" .
-            $merchantIdArray[0] .
-            "/orders/" .
-            $klarnaOrder->getKlarnaOrderId();
+        $isTest = $this->apiConfiguration->isTestMode($store, $currency);
+        $portalBaseUrl = $isTest ? self::MERCHANT_TEST_PORTAL : self::MERCHANT_PORTAL;
+        $merchantId = $this->apiConfiguration->getUserName($store, $currency);
+
+        return $portalBaseUrl .
+            "orders/" .
+            $klarnaOrder->getKlarnaOrderId() .
+            "?merchantId=" .
+            $merchantId;
     }
 }
