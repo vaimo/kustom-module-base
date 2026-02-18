@@ -1,3 +1,8 @@
+11.0.15 / 2026-02-18
+==================
+
+* KUSTOM-51 Changing the direct linking on the admin panel to Kustom
+
 11.0.14 / 2026-01-15
 ==================
 

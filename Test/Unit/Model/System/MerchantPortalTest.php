@@ -67,7 +67,7 @@ class MerchantPortalTest extends TestCase
             ->method('isTestMode')
             ->willreturn(false);
 
-        $urlPath = 'orders/ORDER-123?merchantId=MERCHANT-123';
+        $urlPath = 'orders/list/ORDER-123?merchantId=MERCHANT-123';
         $expected = MerchantPortal::MERCHANT_PORTAL . $urlPath;
 
         $result = $this->model->getOrderMerchantPortalLink($this->mageOrder, $this->klarnaOrder);
@@ -84,7 +84,7 @@ class MerchantPortalTest extends TestCase
             ->method('isTestMode')
             ->willreturn(true);
 
-        $urlPath = 'orders/ORDER-123?merchantId=MERCHANT-123';
+        $urlPath = 'orders/list/ORDER-123?merchantId=MERCHANT-123';
         $expected = MerchantPortal::MERCHANT_TEST_PORTAL . $urlPath;
 
         $result = $this->model->getOrderMerchantPortalLink($this->mageOrder, $this->klarnaOrder);

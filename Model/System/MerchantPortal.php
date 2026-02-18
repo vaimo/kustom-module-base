@@ -53,7 +53,7 @@ class MerchantPortal
         $merchantId = $this->apiConfiguration->getUserName($store, $currency);
 
         return $portalBaseUrl .
-            "orders/" .
+            "orders/list/" .
             $klarnaOrder->getKlarnaOrderId() .
             "?merchantId=" .
             $merchantId;
