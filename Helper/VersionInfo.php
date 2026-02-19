@@ -22,6 +22,8 @@ class VersionInfo
 {
     public const M2_KLARNA = 'kustom/module-checkout';
 
+    public const M2_VAIMO_KUSTOM = 'vaimo/kustom-m2-checkout';
+
     /**
      * @var State
      */
@@ -168,6 +170,10 @@ class VersionInfo
     public function getM2KlarnaVersion(): string
     {
         $composerVersion = $this->getComposerPackageVersion(self::M2_KLARNA);
+        if (empty($composerVersion)) {
+            $composerVersion = $this->getComposerPackageVersion(self::M2_VAIMO_KUSTOM);
+        }
+
         return !empty($composerVersion) ? $composerVersion : $this->getFallbackExtensionVersion();
     }
 
