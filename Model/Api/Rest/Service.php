@@ -179,9 +179,15 @@ class Service implements ServiceInterface
                 }
                 $response = array_merge($response, $body);
             }
+            if (!isset($response['error_messages'])) {
+                $response['error_messages'] = [$e->getMessage()];
+            }
             $response['exception_code'] = $e->getCode();
         } catch (\Exception $e) {
             $this->log->critical($e);
+            if (!isset($response['error_messages'])) {
+                $response['error_messages'] = [$e->getMessage()];
+            }
             $response['exception_code'] = $e->getCode();
         }
 
