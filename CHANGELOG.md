@@ -1,3 +1,8 @@
+11.0.17 / 2026-03-05
+==================
+
+* KUSTOM-55 Fix missing error message when Klarna API exception is thrown
+
 11.0.15 / 2026-02-18
 ==================
 
