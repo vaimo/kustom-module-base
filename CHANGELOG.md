@@ -1,17 +1,18 @@
-11.0.17 / 2026-03-05
+11.0.17 / 2026-03-16
 ==================
 
-* KUSTOM-55 Fix missing error message when Klarna API exception is thrown
+  * KUSTOM-55 Fix missing error message when Klarna API exception is thrown
+  * KUSTOM-68 Fix guzzlehttp/guzzle compatibility issue for magento <2.4.5
 
 11.0.15 / 2026-02-18
 ==================
 
-* KUSTOM-51 Changing the direct linking on the admin panel to Kustom
+  * KUSTOM-51 Changing the direct linking on the admin panel to Kustom
 
 11.0.14 / 2026-01-15
 ==================
 
-* KUSTOM-36 Adjusts the endpoints to direct to Kustom instead of Klarna API
+  * KUSTOM-36 Adjusts the endpoints to direct to Kustom instead of Klarna API
 
 11.0.13 / 2025-11-13
 ==================
