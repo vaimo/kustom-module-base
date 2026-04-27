@@ -3,6 +3,7 @@
 
   * KUSTOM-55 Fix missing error message when Klarna API exception is thrown
   * KUSTOM-68 Fix guzzlehttp/guzzle compatibility issue for magento <2.4.5
+  * KUSTOM-20 Fix broken merchant portal link in order detail page
 
 11.0.15 / 2026-02-18
 ==================

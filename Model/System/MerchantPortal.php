@@ -50,7 +50,7 @@ class MerchantPortal
 
         $isTest = $this->apiConfiguration->isTestMode($store, $currency);
         $portalBaseUrl = $isTest ? self::MERCHANT_TEST_PORTAL : self::MERCHANT_PORTAL;
-        $merchantId = $this->apiConfiguration->getUserName($store, $currency);
+        $merchantId = $this->apiConfiguration->getClientIdentifier($store, $currency);
 
         return $portalBaseUrl .
             "orders/list/" .
