@@ -71,7 +71,8 @@ $addressData = [
     AddressInterface::KEY_STREET => 'Green str, 67',
     AddressInterface::KEY_LASTNAME => 'Smith',
     AddressInterface::KEY_FIRSTNAME => 'John',
-    AddressInterface::KEY_REGION_ID => 1,
+    AddressInterface::KEY_REGION => 'CA',
+    AddressInterface::KEY_REGION_ID => '12',
     AddressInterface::KEY_EMAIL => 'any_mail@mail.me'
 ];
 
