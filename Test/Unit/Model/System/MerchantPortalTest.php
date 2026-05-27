@@ -51,7 +51,7 @@ class MerchantPortalTest extends TestCase
 
         $merchantId = 'MERCHANT-123';
         $this->dependencyMocks['apiConfiguration']
-            ->method('getUsername')
+            ->method('getClientIdentifier')
             ->willReturn($merchantId);
         $this->klarnaOrder
             ->method('getKlarnaOrderId')
