@@ -1,14 +1,17 @@
 <?php
+
 /**
  * Copyright © Klarna Bank AB (publ)
  *
  * For the full copyright and license information, please view the NOTICE
  * and LICENSE files that were distributed with this source code.
  */
+
 declare(strict_types=1);
 
 namespace Klarna\Base\Test\Unit\Mock;
 
+use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -27,7 +30,6 @@ class MockFactory
 
     /**
      * @param TestCase $testClass
-     * @codeCoverageIgnore
      */
     public function __construct(TestCase $testClass)
     {
@@ -44,7 +46,7 @@ class MockFactory
      */
     public function create(string $className, array $onlyMethods = [], array $addMethods = [])
     {
-        $mock = $this->testClass->getMockBuilder($className);
+        $mock = new MockBuilder($this->testClass, $className);
         $mock->disableOriginalConstructor();
 
         if (!empty($onlyMethods)) {
