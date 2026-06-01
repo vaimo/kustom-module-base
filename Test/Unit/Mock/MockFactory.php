@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace Klarna\Base\Test\Unit\Mock;
 
+use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\MockObject\MockBuilder;
+use PHPUnit\Framework\SkippedWithMessageException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -54,6 +56,10 @@ class MockFactory
         }
 
         if (!empty($addMethods)) {
+            if (!method_exists($mock, 'addMethods')) {
+                throw new SkippedWithMessageException('For now skipping tests with addMethods usage, as this does not exist in newer PHPUnit');
+            }
+
             $mock->addMethods($addMethods);
         }
 
